@@ -1,6 +1,6 @@
-import menna from 'menna'
+import * as menna from 'menna'
 import { concat, defaultTo } from 'ramda'
-import cfg from '~/cfg'
+import cfg from './'
 import { Config } from './cfg.interface'
 
 /**
@@ -45,7 +45,7 @@ const getMissingVars = (config: Config, keys: string[]) =>
 const logMissingVar = (config: Config, key: string, logger: (input: string) => void) =>
   logger(`Expected environment variable ${key} to exist but found: ${config[key]}`)
 
-module.exports = (config = cfg, mandatoryConfigVars = getRequiredVars(MANDATORY_CONFIG_VARS)) => {
+export default (config = cfg, mandatoryConfigVars = getRequiredVars(MANDATORY_CONFIG_VARS)) => {
   const missingMandatoryVars = getMissingVars(config, mandatoryConfigVars)
   const missingFunctionalVars = getMissingVars(config, getRequiredVars(FUNCTIONAL_CONFIG_VARS))
 

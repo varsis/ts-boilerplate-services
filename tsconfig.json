@@ -14,9 +14,9 @@
 		"sourceMap": true,
 		"declaration": false,
     "outDir": "out",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"]
+      "*": ["*","src/*"]
     }
   },
   "exclude": [

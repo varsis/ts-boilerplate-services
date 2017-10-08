@@ -1,13 +1,13 @@
 import { Server } from './server'
-import menna from 'menna'
+import * as log from 'menna'
 
-menna.info('Initialize server')
+log.info('Initialize server')
 
 new Server()
   .start()
   .then(() => {
-    menna.info('Server started...')
+    log.info('Server started...')
   })
   .catch((err: any) => {
-    menna.error(err)
+    log.error(err)
   })

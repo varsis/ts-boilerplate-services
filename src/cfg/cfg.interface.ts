@@ -6,6 +6,7 @@ export interface Config {
   // Database Config
   readonly DATABASE?: string
   readonly DATABASE_HOST?: string
+  readonly DATABASE_PORT?: number
   readonly DATABASE_USER?: string
   readonly DATABASE_PASSWORD?: string
   readonly DATABASE_DIALECT?: string

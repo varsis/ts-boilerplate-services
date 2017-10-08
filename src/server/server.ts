@@ -1,64 +1,56 @@
 import * as Express from 'express'
+import * as bodyParser from 'body-parser'
 import { ServerLoader, ServerSettings, Inject, GlobalAcceptMimesMiddleware } from 'ts-express-decorators'
 import * as path from 'path'
-import log from 'menna'
+import * as log from 'menna'
+import requiredEnvVarsAreMissing from '../cfg/assert'
+import * as blocked from 'blocked'
+import { CONFIG } from '../cfg'
 
-const rootDir = path.resolve(__dirname)
+import requestLogger from '../middleware/request-logger.middleware'
+import { SEQUELIZE_CONFIG } from '../cfg/database'
+import { DatabaseService } from '../services/database/index'
+
+const rootDir = path.resolve(path.join(__dirname, '../'))
+
+if (process.env.NODE_ENV !== 'test' && requiredEnvVarsAreMissing()) process.exit(1)
+
+// Check if server has been blocked
+// tslint:disable-next-line:no-magic-numbers
+blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms}ms`) } })
 
 @ServerSettings({
   rootDir,
   mount: {
-    '/rest': `${rootDir}/controllers/**/**.js`,
+    '/': `${rootDir}/handlers/**/**.js`,
+  },
+  port: CONFIG.PORT,
+  componentsScan: [
+    `${rootDir}/middleware/**/**.js`,
+    `${rootDir}/services/**/**.js`,
+    `${rootDir}/cfg/**/**.js`,
+  ],
+  swagger: {
+    path: '/docs',
   },
   acceptMimes: ['application/json'],
 })
 export class Server extends ServerLoader {
 
-  $onInit(): Promise<any> {
-    return MongooseService
-    .connect()
-    .then(() => log.debug('DB connected'))
+  @Inject()
+  async $onInit(): Promise<any> {
+    const database = DatabaseService.connect(SEQUELIZE_CONFIG)
+    return database.authenticate()
+      .then(() => log.debug('DB connected'))
   }
 
-  @Inject()
-  $onMountingMiddlewares(passportService: PassportLocalService): void|Promise<any> {
-
-    const morgan = require('morgan'),
-      cookieParser = require('cookie-parser'),
-      bodyParser = require('body-parser'),
-      compress = require('compression'),
-      methodOverride = require('method-override'),
-      session = require('express-session'),
-      passport = require('passport')
-
-
+  $onMountingMiddlewares(): void|Promise<any> {
     this
-    .use(morgan('dev'))
-    .use(GlobalAcceptMimesMiddleware)
-    .use(cookieParser())
-    .use(compress({}))
-    .use(methodOverride())
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({
-      extended: true
-    }))
-
-    // Configure session used by Passport
-    .use(session({
-      secret: 'mysecretkey',
-      resave: true,
-      saveUninitialized: true,
-      maxAge: 36000,
-      cookie: {
-        path: '/',
-        httpOnly: true,
-        secure: false,
-        maxAge: null
-      }
-    }))
-    // Configure passport JS
-    .use(passportService.middlewareInitialize())
-    .use(passportService.middlewareSession())
+      .use(bodyParser.json())
+      .use(bodyParser.urlencoded({
+        extended: false,
+      }))
+      .use(requestLogger)
   }
 
   $onReady() {
