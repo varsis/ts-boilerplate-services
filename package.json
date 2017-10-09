@@ -18,6 +18,7 @@
   "author": "Chris Pavlicek",
   "license": "ISC",
   "dependencies": {
+    "a": "^2.1.1",
     "blocked": "^1.2.1",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
@@ -34,8 +35,8 @@
     "reflect-metadata": "^0.1.10",
     "sequelize": "^4.13.5",
     "sequelize-typescript": "^0.5.0",
-    "swagger-ui-express": "^2.0.8",
-    "ts-express-decorators": "2.0.0",
+    "swagger-ui-express": "^2.0.0",
+    "ts-express-decorators": "^2.0.8",
     "typescript": "^2.5.3"
   },
   "devDependencies": {
@@ -43,6 +44,7 @@
     "@types/express": "^4.0.37",
     "@types/node": "^8.0.13",
     "@types/ramda": "^0.24.16",
+    "@types/swagger-schema-official": "^2.0.6",
     "@types/winston": "^2.3.6",
     "concurrently": "^3.1.0",
     "nodemon": "^1.11.0",

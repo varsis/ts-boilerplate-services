@@ -1,6 +1,7 @@
 import * as Express from 'express'
 import * as bodyParser from 'body-parser'
 import { ServerLoader, ServerSettings, Inject, GlobalAcceptMimesMiddleware } from 'ts-express-decorators'
+import 'ts-express-decorators/swagger'
 import * as path from 'path'
 import * as log from 'menna'
 import requiredEnvVarsAreMissing from '../cfg/assert'
@@ -30,6 +31,7 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
     `${rootDir}/services/**/**.js`,
     `${rootDir}/cfg/**/**.js`,
   ],
+  httpsPort: false,
   swagger: {
     path: '/docs',
   },
