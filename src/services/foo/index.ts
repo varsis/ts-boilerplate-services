@@ -29,7 +29,7 @@ export class FooService {
     return (await this.get(id)).destroy()
   }
   public async get(id: string): Promise<Foo> {
-    const foo = await this.models.Foo.findById<Foo>(id)
+    const foo = await this.models.Foo.findOne<Foo>({ where: { id } })
     if (!foo) throw new FooNotFound()
     return foo
   }

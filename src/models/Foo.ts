@@ -24,9 +24,12 @@ export class Foo extends Model<Foo> {
   @Column
   sequentialId: number
 
-  @Unique
-  @AllowNull(false)
-  @Column(DataType.UUIDV4)
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    allowNull: false,
+    unique: true,
+  })
   id: string
 
   @Column
