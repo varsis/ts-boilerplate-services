@@ -1,0 +1,8 @@
+const path = require('path')
+dotenv = require('./out/cfg/dotenv')
+
+module.exports = {
+  'models-path': path.resolve('out', 'lib', 'models'),
+  'config': path.resolve('out', 'cfg', 'database.js'),
+  logging: true
+}

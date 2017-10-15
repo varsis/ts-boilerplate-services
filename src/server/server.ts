@@ -9,7 +9,7 @@ import * as blocked from 'blocked'
 import { CONFIG } from '../cfg'
 
 import requestLogger from '../middleware/request-logger.middleware'
-import { SEQUELIZE_CONFIG } from '../cfg/database'
+import * as SEQUELIZE_CONFIG from '../cfg/database'
 import { DatabaseService } from '../services/database/index'
 
 const rootDir = path.resolve(path.join(__dirname, '../'))
@@ -27,6 +27,7 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
   },
   port: CONFIG.PORT,
   componentsScan: [
+    `${rootDir}/models/factory/**.js`,
     `${rootDir}/middleware/**/**.js`,
     `${rootDir}/services/**/**.js`,
     `${rootDir}/cfg/**/**.js`,

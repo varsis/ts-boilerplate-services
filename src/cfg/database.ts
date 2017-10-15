@@ -3,7 +3,7 @@ import { ISequelizeConfig } from 'sequelize-typescript'
 import { Service } from 'ts-express-decorators'
 import { CONFIG } from './index'
 
-export const SEQUELIZE_CONFIG: ISequelizeConfig = {
+const SEQUELIZE_CONFIG: ISequelizeConfig = {
   modelPaths: [path.join(__dirname, '../models')],
   username: CONFIG.DATABASE_USER || '',
   password: CONFIG.DATABASE_PASSWORD || '',
@@ -13,3 +13,5 @@ export const SEQUELIZE_CONFIG: ISequelizeConfig = {
   dialect: CONFIG.DATABASE_DIALECT,
   storage: 'sequelize',
 }
+
+export = SEQUELIZE_CONFIG
