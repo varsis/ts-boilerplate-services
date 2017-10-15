@@ -11,8 +11,10 @@ import {
   QueryParams,
   Res,
 } from 'ts-express-decorators'
+import { Returns } from 'ts-express-decorators/swagger'
 import { FooService } from '../../services'
-import { FooResponse, PagedResponse, FooCreateRequest, FooUpdateRequest } from '../../interfaces'
+import { FooResponse, FooCreateRequest, FooUpdateRequest, PagedFooResponse } from '../../models'
+import { PagedResponse } from '../../models/paging'
 
 @Controller('/foo')
 export class FooHandler {
@@ -20,6 +22,7 @@ export class FooHandler {
   constructor(private fooService: FooService){}
 
   @Get('/')
+  @Returns(PagedFooResponse)
   public async list (
     @QueryParams('pageNumber') pageNumber: number = 0,
     @QueryParams('pageSize') pageSize: number = 20,

@@ -4,7 +4,7 @@ import { Service } from 'ts-express-decorators'
 import { CONFIG } from './index'
 
 const SEQUELIZE_CONFIG: ISequelizeConfig = {
-  modelPaths: [path.join(__dirname, '../models')],
+  modelPaths: [path.join(__dirname, '../database-models')],
   username: CONFIG.DATABASE_USER || '',
   password: CONFIG.DATABASE_PASSWORD || '',
   database: CONFIG.DATABASE || '',

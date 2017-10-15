@@ -27,7 +27,9 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
   },
   port: CONFIG.PORT,
   componentsScan: [
-    `${rootDir}/models/factory/**.js`,
+    `${rootDir}/database-models/factory/**.js`,
+    `${rootDir}/models/**/**.js`,
+    `${rootDir}/interaces/**/**.js`,
     `${rootDir}/middleware/**/**.js`,
     `${rootDir}/services/**/**.js`,
     `${rootDir}/cfg/**/**.js`,

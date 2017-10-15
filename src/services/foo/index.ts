@@ -1,9 +1,9 @@
 import { Service } from 'ts-express-decorators'
-import { FooCreateRequest, FooUpdateRequest } from '../../interfaces'
+import { IFooCreateRequest, IFooUpdateRequest } from '../../interfaces'
 import { FooNotFound } from '../../errors'
 import { DatabaseService } from '../database/index'
-import { Foo } from '../../models/Foo'
-import { ModelsFactory } from '../../models/factory'
+import { Foo } from '../../database-models/Foo'
+import { ModelsFactory } from '../../database-models/factory'
 
 @Service()
 export class FooService {
@@ -12,10 +12,10 @@ export class FooService {
     private models: ModelsFactory,
   ) {}
 
-  public async create(foo: FooCreateRequest): Promise<Foo> {
+  public async create(foo: IFooCreateRequest): Promise<Foo> {
     return this.models.Foo.create<Foo>(foo)
   }
-  public async update(id: string, fooUpdate: FooUpdateRequest): Promise<Foo> {
+  public async update(id: string, fooUpdate: IFooUpdateRequest): Promise<Foo> {
     const foo = await this.get(id)
     return foo.update(fooUpdate)
   }

@@ -1,9 +1,9 @@
-export interface PagedQueryParams {
+export interface IPagedQueryParams {
   pageSize?: number
   pageNumber?: number
 }
 
-export interface PagedResponse<T> {
+export interface IPagedResponse<T> {
   data: T[]
   pageSize: number
   pageNumber: number

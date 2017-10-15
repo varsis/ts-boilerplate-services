@@ -1,37 +1,33 @@
-import { Service } from 'ts-express-decorators'
-import { AutoIncrement, AllowNull, PrimaryKey, Table, Column, Unique, Model, DataType } from 'sequelize-typescript'
+import { JsonProperty } from 'ts-express-decorators'
+import { IFooResponse, IFooCreateRequest, IFooUpdateRequest } from '../interfaces'
+import { PagedResponse } from './paging'
 
-@Table({
-  timestamps: true,
-})
-export class Foo extends Model<Foo> {
-
-  // This can be done in a few ways
-  /*
-   * @Column({
-   *  type: DataTypes.INTEGER,
-   *  primaryKey: true,
-   *  autoIncrement: true,
-   *  allowNull: false,
-   * })
-   */
-
-  // Or as below, using helper decorators
-  // Type is inferenced see docs for details
-  @AutoIncrement
-  @PrimaryKey
-  @AllowNull(false)
-  @Column
+export class FooResponse implements IFooResponse {
+  @JsonProperty()
   sequentialId: number
 
-  @Column({
-    type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
-    allowNull: false,
-    unique: true,
-  })
+  @JsonProperty()
   id: string
 
-  @Column
+  @JsonProperty()
+  bar: string
+}
+
+export class PagedFooResponse implements PagedResponse<FooResponse> {
+  @JsonProperty()
+  data: FooResponse[]
+  @JsonProperty()
+  pageNumber: number
+  @JsonProperty()
+  pageSize: number
+}
+
+export class FooCreateRequest implements IFooCreateRequest {
+  @JsonProperty()
+  bar: string
+}
+
+export class FooUpdateRequest implements IFooUpdateRequest {
+  @JsonProperty()
   bar: string
 }
