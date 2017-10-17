@@ -1,4 +1,6 @@
 // Input Fields
+import { IPagedResponse } from './'
+
 export interface IFooCreateRequest {
   bar: string
 }
@@ -15,4 +17,6 @@ export interface IFooResponse {
   id: string
   bar: string
 }
+
+export interface IPagedFooResponse extends IPagedResponse<IFooResponse> {}
 

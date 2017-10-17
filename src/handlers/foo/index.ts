@@ -10,6 +10,7 @@ import {
   Post,
   QueryParams,
   Res,
+  Required,
 } from 'ts-express-decorators'
 import { Returns } from 'ts-express-decorators/swagger'
 import { FooService } from '../../services'
@@ -36,6 +37,7 @@ export class FooHandler {
 
   @Get('/:id')
   public get (
+    @Required()
     @PathParams('id') id: string,
   ): Promise<FooResponse> {
     return this.fooService.get(id)
@@ -43,6 +45,7 @@ export class FooHandler {
 
   @Post('/')
   public create (
+    @Required()
     @BodyParams() foo: FooCreateRequest,
   ): Promise<FooResponse> {
     return this.fooService.create(foo)
@@ -50,7 +53,9 @@ export class FooHandler {
 
   @Patch('/:id')
   public update(
+    @Required()
     @PathParams('id') id: string,
+    @Required()
     @BodyParams() foo: FooUpdateRequest,
   ): Promise<FooResponse> {
     return this.fooService.update(id, foo)
@@ -58,6 +63,7 @@ export class FooHandler {
 
   @Delete('/:id')
   public delete(
+    @Required()
     @PathParams('id') id: string,
   ): Promise<void> { // TODO Type of response
     return this.fooService.delete(id)

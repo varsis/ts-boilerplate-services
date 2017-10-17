@@ -1,5 +1,5 @@
 import { JsonProperty } from 'ts-express-decorators'
-import { IFooResponse, IFooCreateRequest, IFooUpdateRequest } from '../interfaces'
+import { IFooResponse, IFooCreateRequest, IFooUpdateRequest, IPagedFooResponse } from '../interfaces'
 import { PagedResponse } from './paging'
 
 export class FooResponse implements IFooResponse {
@@ -13,13 +13,9 @@ export class FooResponse implements IFooResponse {
   bar: string
 }
 
-export class PagedFooResponse implements PagedResponse<FooResponse> {
-  @JsonProperty()
+export class PagedFooResponse extends PagedResponse<FooResponse> implements IPagedFooResponse {
+  @JsonProperty({ use: FooResponse })
   data: FooResponse[]
-  @JsonProperty()
-  pageNumber: number
-  @JsonProperty()
-  pageSize: number
 }
 
 export class FooCreateRequest implements IFooCreateRequest {

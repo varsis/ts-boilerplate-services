@@ -11,6 +11,8 @@ import { CONFIG } from '../cfg'
 import requestLogger from '../middleware/request-logger.middleware'
 import * as SEQUELIZE_CONFIG from '../cfg/database'
 import { DatabaseService } from '../services/database/index'
+import { BaseError } from '../errors/error'
+import { InternalServerError } from '../errors'
 
 const rootDir = path.resolve(path.join(__dirname, '../'))
 
@@ -60,6 +62,19 @@ export class Server extends ServerLoader {
 
   $onReady() {
     log.debug('Server initialized')
+  }
+
+  $onError(error: any, request: Express.Request, response: Express.Response, next: Function): void {
+    log.error(error)
+
+    let responseError: BaseError = new InternalServerError()
+    if (error instanceof BaseError) {
+      responseError = error
+    }
+
+    response
+      .status(responseError.httpCode)
+      .send(responseError.toJSON())
   }
 
   $onServerInitError(error): any {
