@@ -57,6 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# Temp files
+.DS_Store
+
 # Output from build
 out/
 

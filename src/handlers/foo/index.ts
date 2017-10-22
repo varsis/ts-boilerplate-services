@@ -38,7 +38,6 @@ export class FooHandler {
   @Get('/:id')
   public get (
     @Required()
-    @Schema({ format: 'uuid' })
     @PathParams('id') id: string,
   ): Promise<FooResponse> {
     return this.fooService.get(id)

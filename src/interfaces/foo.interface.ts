@@ -16,6 +16,8 @@ export interface IFooResponse {
   sequentialId: number
   id: string
   bar: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export interface IPagedFooResponse extends IPagedResponse<IFooResponse> {}

@@ -48,6 +48,8 @@
     "@types/swagger-schema-official": "^2.0.6",
     "@types/winston": "^2.3.6",
     "concurrently": "^3.1.0",
+    "cucumber": "^3.0.6",
+    "cucumber-tsflow": "^2.2.0",
     "nodemon": "^1.11.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0",
