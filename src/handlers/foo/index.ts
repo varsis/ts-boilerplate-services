@@ -12,7 +12,7 @@ import {
   Res,
   Required,
 } from 'ts-express-decorators'
-import { Returns } from 'ts-express-decorators/swagger'
+import { Returns, Schema } from 'ts-express-decorators/swagger'
 import { FooService } from '../../services'
 import { FooResponse, FooCreateRequest, FooUpdateRequest, PagedFooResponse } from '../../models'
 import { PagedResponse } from '../../models/paging'
@@ -38,6 +38,7 @@ export class FooHandler {
   @Get('/:id')
   public get (
     @Required()
+    @Schema({ format: 'uuid' })
     @PathParams('id') id: string,
   ): Promise<FooResponse> {
     return this.fooService.get(id)
