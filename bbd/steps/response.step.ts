@@ -1,5 +1,6 @@
 import { flatten, split, path, isNil } from 'ramda'
 import { has, get } from 'lodash'
+import { expect } from 'chai'
 import { binding, given, then, when } from "cucumber-tsflow"
 import * as statusCodes from 'http-status-codes'
 import * as prettyjson from 'prettyjson'
@@ -28,7 +29,7 @@ class ResponseStep {
 
   @then(/^the response should have a "(.*)" header of "(.*)"$/)
   public async thenResponseHeader(headerName, value): Promise<any> {
-    this.responseSpace.response.headers[headerName].should.equal(value)
+    expect(this.responseSpace.response.headers[headerName]).to.equal(value)
   }
 
   @then(/^the response should have a ([^\\ ]*)$/)

@@ -13,14 +13,14 @@ Scenario: Checking an unauthenticated endpoint with no auth header
 	Then the response should indicate Ok
 
 Scenario: Checking an authenticated endpoint with no auth header
-	Given there is a GET request to /foos/85f0a397-d54e-413e-a0ba-c38da94a396a
+	Given there is a GET request to /foo/85f0a397-d54e-413e-a0ba-c38da94a396a
   And the request is not authenticated
   When the request is sent to the server
   Then the response should indicate Unauthorized
   And an unauthorized error should be returned in the response
 
 Scenario: Calling an authenticated endpoint with the correct auth header
-	Given there is a GET request to /foos/85f0a397-d54e-413e-a0ba-c38da94a396a
+	Given there is a GET request to /foo/85f0a397-d54e-413e-a0ba-c38da94a396a
   And the request has the correct API key
   When the request is sent to the server
 	Then the response should indicate Ok

@@ -26,7 +26,7 @@ class FooStep {
   }
 
   @given(/^there is a request to get the same foo$/)
-  public async givenFoodRequest(data): Promise<void> {
+  public async givenFoodRequest(): Promise<void> {
     expect(this.requestSpace.body.id).to.be.a('string')
     uuidValidate(this.responseSpace.body.id).should.be.true // eslint-disable-line chai-friendly/no-unused-expressions
     const id = this.requestSpace.body.id
@@ -35,7 +35,7 @@ class FooStep {
   }
 
   @then(/^the foo should be output in the response$/)
-  public async thenFooResponse(data): Promise<void> {
+  public async thenFooResponse(): Promise<void> {
     expect(this.responseSpace.body.id).to.exist
     const id = this.responseSpace.body.id
 
