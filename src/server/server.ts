@@ -26,22 +26,21 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
 @ServerSettings({
   rootDir,
   mount: {
-    '/': `${rootDir}/handlers/**/**.js`,
+    '/': `${rootDir}/handlers/**/**.${CONFIG.EXTENSION}`,
   },
   port: CONFIG.PORT,
   componentsScan: [
-    `${rootDir}/database-models/factory/**.js`,
-    `${rootDir}/models/**/**.js`,
-    `${rootDir}/interaces/**/**.js`,
-    `${rootDir}/middleware/**/**.js`,
-    `${rootDir}/services/**/**.js`,
-    `${rootDir}/cfg/**/**.js`,
+    `${rootDir}/database-models/factory/**.${CONFIG.EXTENSION}`,
+    `${rootDir}/models/**/**.${CONFIG.EXTENSION}`,
+    `${rootDir}/interaces/**/**.${CONFIG.EXTENSION}`,
+    `${rootDir}/middleware/**/**.${CONFIG.EXTENSION}`,
+    `${rootDir}/services/**/**.${CONFIG.EXTENSION}`,
+    `${rootDir}/cfg/**/**.${CONFIG.EXTENSION}`,
   ],
   httpsPort: false,
   swagger: {
     path: '/docs',
     validate: true,
-    specPath: `${rootDir}/swagger.json`,
   },
   acceptMimes: ['application/json'],
 })

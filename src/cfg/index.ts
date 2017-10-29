@@ -2,9 +2,12 @@ import { Config } from './cfg.interface'
 import './dotenv'
 
 const DEFAULT_DATABASE_PORT = '5432'
+const DEFAULT_EXTENSION = 'js'
 const INT_BASE = 10
 
 export const CONFIG: Config = {
+  EXTENSION: process.env.EXTENSION || DEFAULT_EXTENSION,
+
   PORT: process.env.PORT,
 
   DATABASE: process.env.DATABASE,

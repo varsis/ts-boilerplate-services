@@ -1,5 +1,7 @@
 // Define Config values here
 export interface Config {
+  readonly EXTENSION?: string
+
   // Server Port
   readonly PORT?: string
 

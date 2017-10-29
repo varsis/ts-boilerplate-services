@@ -9,7 +9,10 @@
     "postbuild": "cp -rf ./src/cfg/defaults/ ./out/cfg/defaults/",
     "coverage": "npm run test-cov && npm run test-remap",
     "postinstall": "npm run build",
+    "test-server": "NODE_ENV=test ./node_modules/.bin/ts-node -P ./ ./src/app.ts",
     "lint": "tslint ./src/*/**.ts",
+    "test:bbd": "cucumber.js --compiler ts:ts-node/register bbd -r bbd/steps -r bbd/support",
+    "test:unit": "mocha --reporter spec --check-leaks --bail test/",
     "test": "mocha --reporter spec --check-leaks --bail test/",
     "tsc": "tsc --project tsconfig.json",
     "tsc:w": "tsc -w",
@@ -41,25 +44,34 @@
     "typescript": "^2.5.3"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.4",
     "@types/dotenv": "^4.0.1",
     "@types/express": "^4.0.37",
     "@types/node": "^8.0.34",
+    "@types/prettyjson": "0.0.28",
     "@types/ramda": "^0.24.17",
+    "@types/supertest": "^2.0.3",
+    "@types/supertest-as-promised": "^2.0.34",
     "@types/swagger-schema-official": "^2.0.6",
     "@types/winston": "^2.3.6",
+    "chai": "^4.1.2",
     "concurrently": "^3.1.0",
     "cucumber": "^3.0.6",
     "cucumber-tsflow": "^2.2.0",
     "nodemon": "^1.11.0",
+    "prettyjson": "^1.2.1",
+    "sqlite3": "^3.1.13",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2",
+    "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0",
     "tslint-config-airbnb-base": "^0.1.0",
-    "tslint-eslint-rules": "^4.1.1"
+    "tslint-eslint-rules": "^4.1.1",
+    "umzug": "^2.1.0",
+    "uuid-validate": "0.0.2"
   },
   "nodemonConfig": {
-    "ignore": [
-      "out/swagger.json"
-    ],
     "delay": "2500"
   }
 }

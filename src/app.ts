@@ -3,7 +3,9 @@ import * as log from 'menna'
 
 log.info('Initialize server')
 
-new Server()
+export const serverInstance = new Server()
+
+export const server = serverInstance
   .start()
   .then(() => {
     log.info('Server started...')
@@ -11,3 +13,4 @@ new Server()
   .catch((err: any) => {
     log.error(err)
   })
+

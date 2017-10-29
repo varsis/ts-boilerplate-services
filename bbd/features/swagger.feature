@@ -12,14 +12,8 @@ Scenario: Checking the documentation endpoint
     When the request is sent to the server
 	Then the response should indicate Ok
 
-Scenario: Checking the Swagger YAML
-	Given there is a GET request to /swagger/swagger.yaml
-    When the request is sent to the server
-	Then the response should indicate Ok
-    And the response should have a "content-type" header of "text/x-yaml; charset=utf-8"
-
 Scenario: Checking the Swagger JSON
-	Given there is a GET request to /swagger/swagger.json
+	Given there is a GET request to /docs/swagger.json
     When the request is sent to the server
 	Then the response should indicate Ok
     And the response should have a "content-type" header of "application/json; charset=utf-8"
