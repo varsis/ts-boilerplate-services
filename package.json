@@ -11,9 +11,9 @@
     "postinstall": "npm run build",
     "test-server": "NODE_ENV=test ./node_modules/.bin/ts-node -P ./ ./src/app.ts",
     "lint": "tslint ./src/*/**.ts",
-    "test:bbd": "cucumber.js  --compiler ts:ts-node/register bbd -r bbd/steps -r bbd/support",
-    "test:unit": "mocha -r ts-node/register --reporter spec --check-leaks --bail src/**/*.spec.ts bbd/**/*.spec.ts",
-    "test": "mocha --reporter spec --check-leaks --bail test/",
+    "test:bbd": "NODE_ENV=test cucumber.js --compiler ts:ts-node/register bbd -r bbd/steps -r bbd/support",
+    "test:unit": "NODE_ENV=test  mocha -r ts-node/register --reporter spec --check-leaks --bail src/**/*.spec.ts bbd/**/*.spec.ts",
+    "test": "NODE_ENV=test concurrently \"npm run test:bbd\" \"npm run test:unit\"",
     "tsc": "tsc --project tsconfig.json",
     "tsc:w": "tsc -w",
     "start": "concurrently \"npm run tsc:w\" \"nodemon out/app.js\""

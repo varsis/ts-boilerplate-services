@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { propertiesExistInList, propertiesDontExistInList, typeOf } from './util'
+import { propertiesExistInList, propertiesDontExistInList, typeOf } from '../support/util'
 
 describe('Test utilities', () => {
   describe('Checking the response array', () => {
