@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf ./out",
     "build": "npm run tsc",
-    "postbuild": "cp -rf ./src/cfg/defaults/ ./out/cfg/defaults/",
+    "postbuild": "mkdir -p ./out/cfg/defaults && cp -rf ./src/cfg/defaults/ ./out/cfg/defaults/",
     "coverage": "npm run test-cov && npm run test-remap",
     "postinstall": "npm run build",
     "test-server": "NODE_ENV=test ./node_modules/.bin/ts-node -P ./ ./src/app.ts",
