@@ -48,7 +48,7 @@ class RequestStep {
       header => request = request.set(header, headers[header])
     )
 
-    if (body) {
+    if (body && Object.keys(body).length) {
       request = request.send(body)
     }
     const res = await request

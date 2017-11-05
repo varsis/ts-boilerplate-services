@@ -9,6 +9,7 @@ export const CONFIG: Config = {
   EXTENSION: process.env.EXTENSION || DEFAULT_EXTENSION,
 
   PORT: process.env.PORT,
+  VERSION: process.env.VERSION,
 
   DATABASE: process.env.DATABASE,
   DATABASE_HOST: process.env.DATABASE_HOST,

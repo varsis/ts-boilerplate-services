@@ -8,11 +8,12 @@ import {
   Patch,
   PathParams,
   Post,
+  Status,
   QueryParams,
   Res,
   Required,
 } from 'ts-express-decorators'
-import { Returns, Schema } from 'ts-express-decorators/swagger'
+import { Returns, Schema, Security } from 'ts-express-decorators/swagger'
 import { FooService } from '../../services'
 import { FooResponse, FooCreateRequest, FooUpdateRequest, PagedFooResponse } from '../../models'
 import { PagedResponse } from '../../models/paging'
@@ -23,6 +24,7 @@ export class FooHandler {
   constructor(private fooService: FooService){}
 
   @Get('/')
+  @Security('APIKeyHeader')
   @Returns(PagedFooResponse)
   public async list (
     @QueryParams('pageNumber') pageNumber: number = 0,
@@ -36,6 +38,7 @@ export class FooHandler {
   }
 
   @Get('/:id')
+  @Security('APIKeyHeader')
   public get (
     @Required()
     @PathParams('id') id: string,
@@ -44,6 +47,8 @@ export class FooHandler {
   }
 
   @Post('/')
+  @Security('APIKeyHeader')
+  @Status(HttpStatusCodes.CREATED)
   public create (
     @Required()
     @BodyParams() foo: FooCreateRequest,
@@ -52,6 +57,7 @@ export class FooHandler {
   }
 
   @Patch('/:id')
+  @Security('APIKeyHeader')
   public update(
     @Required()
     @PathParams('id') id: string,
@@ -62,6 +68,8 @@ export class FooHandler {
   }
 
   @Delete('/:id')
+  @Security('APIKeyHeader')
+  @Status(HttpStatusCodes.NO_CONTENT)
   public delete(
     @Required()
     @PathParams('id') id: string,

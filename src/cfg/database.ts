@@ -12,7 +12,7 @@ const SEQUELIZE_CONFIG: ISequelizeConfig = {
   port: CONFIG.DATABASE_PORT,
   dialect: CONFIG.DATABASE_DIALECT,
   storage: 'sequelize',
-  logging: CONFIG.DISABLE_SEQUELIZE_LOGGING,
+  logging: Boolean(CONFIG.DISABLE_SEQUELIZE_LOGGING),
 }
 
 export = SEQUELIZE_CONFIG

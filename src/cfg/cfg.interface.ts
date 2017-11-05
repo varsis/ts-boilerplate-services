@@ -4,6 +4,7 @@ export interface Config {
 
   // Server Port
   readonly PORT?: string
+  readonly VERSION?: string
 
   // Database Config
   readonly DATABASE?: string

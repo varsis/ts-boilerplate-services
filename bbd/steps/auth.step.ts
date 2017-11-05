@@ -25,7 +25,7 @@ class AuthStep {
   @then(/^an unauthorized error should be returned in the response/)
   public thenAuthenticationError(): void {
     const unauthorized = new Unauthorized()
-    expect(this.response.body).to.equal(unauthorized.toJSON())
+    expect(this.response.body).to.deep.equal(unauthorized.toJSON())
   }
 }
 

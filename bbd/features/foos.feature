@@ -1,7 +1,6 @@
 Feature: CRUD actions on /foo
 
 Background:
-    # You can also put database values in test/data/fake-database.json!
     Given there are foos stored in the database with the following:
     | id                                   | bar   |
     | 99697d9b-2697-4826-b48c-7f0129e13b21 | B@1   |
@@ -11,7 +10,12 @@ Scenario: I can list all the foos
     Given there is a GET request to /foo
     When the request is sent to the server
     Then the response should indicate Ok
-    And the response should be an array of length 3
+    And the response should have a data with length `2`
+    And all items in data array should have a `id`
+    And all items in data array should have a `sequentialId`
+    And all items in data array should have a `bar`
+    And all items in data array should have a `createdAt`
+    And all items in data array should have a `updatedAt`
 
 Scenario: I can create a foo
     Given there is a POST request to /foo
@@ -50,13 +54,9 @@ Scenario: I can get a foo I just created
     And the foo should be output in the response
 
 Scenario: I can delete a foo
-    Given there is a GET request to /foo
-    When the request is sent to the server
-    Then the response should indicate Ok
-    And the response should be an array of length 3
     Given there is a DELETE request to /foo/99697d9b-2697-4826-b48c-7f0129e13b21
     When the request is sent to the server
-    Then the response should indicate Ok
+    Then the response should indicate No_content
     And the database should not have a model identified as:
         | modelName | id                                   |
         | Foo       | 99697d9b-2697-4826-b48c-7f0129e13b21 |

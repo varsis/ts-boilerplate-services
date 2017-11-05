@@ -27,11 +27,13 @@ class FooStep {
 
   @given(/^there is a request to get the same foo$/)
   public async givenFoodRequest(): Promise<void> {
-    expect(this.requestSpace.body.id).to.be.a('string')
-    uuidValidate(this.responseSpace.body.id).should.be.true // eslint-disable-line chai-friendly/no-unused-expressions
-    const id = this.requestSpace.body.id
+    expect(this.responseSpace.body.id).to.be.a('string')
+    // tslint-disable-next-line chai-friendly/no-unused-expressions
+    expect(uuidValidate(this.responseSpace.body.id)).to.be.true
+    const id = this.responseSpace.body.id
     this.requestSpace.method = 'get'
-    this.requestSpace.uri = `/foos/${id}`
+    this.requestSpace.uri = `/foo/${id}`
+    this.requestSpace.body = null
   }
 
   @then(/^the foo should be output in the response$/)

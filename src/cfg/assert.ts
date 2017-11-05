@@ -14,6 +14,7 @@ interface ConfigVars {
 // variables that if missing would prevent the app from working at all
 const MANDATORY_CONFIG_VARS: ConfigVars = {
   default: [
+    'VERSION',
     'PORT',
     'DATABASE',
     'DATABASE_HOST',
@@ -45,18 +46,18 @@ const getMissingVars = (config: Config, keys: string[]) =>
 const logMissingVar = (config: Config, key: string, logger: (input: string) => void) =>
   logger(`Expected environment variable ${key} to exist but found: ${config[key]}`)
 
-export default (config = cfg, mandatoryConfigVars = getRequiredVars(MANDATORY_CONFIG_VARS)) => {
+export default (config = cfg, mandatoryConfigVars = getRequiredVars(MANDATORY_CONFIG_VARS), logger = menna) => {
   const missingMandatoryVars = getMissingVars(config, mandatoryConfigVars)
   const missingFunctionalVars = getMissingVars(config, getRequiredVars(FUNCTIONAL_CONFIG_VARS))
 
   if (missingMandatoryVars.length) {
-    missingMandatoryVars.forEach((v: string) => logMissingVar(config, v, menna.error))
-    menna.error('Refusing to start up due to missing environment variables')
+    missingMandatoryVars.forEach((v: string) => logMissingVar(config, v, logger.error))
+    logger.error('Refusing to start up due to missing environment variables')
   }
 
   if (missingFunctionalVars.length) {
-    missingFunctionalVars.forEach((v: string) => logMissingVar(config, v, menna.warn))
-    menna.warn('Some functionality might be lost due to missing environment variables')
+    missingFunctionalVars.forEach((v: string) => logMissingVar(config, v, logger.warn))
+    logger.warn('Some functionality might be lost due to missing environment variables')
   }
 
   return missingMandatoryVars.length > 0
