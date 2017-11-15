@@ -8,6 +8,7 @@
 		"moduleResolution": "node",
 		"experimentalDecorators":true,
 		"emitDecoratorMetadata": true,
+    "strictFunctionTypes": false,
     "strict": true,
     "noImplicitAny": false,
     "pretty": true,
