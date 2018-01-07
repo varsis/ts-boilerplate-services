@@ -5,4 +5,4 @@
 export * from './base.errors'
 
 // Custom Server Errors
-export * from './foos.errors'
+export * from './users.errors'

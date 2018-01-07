@@ -1,5 +1,6 @@
 // Define Config values here
 export interface Config {
+  readonly DEBUG?: any
   readonly EXTENSION?: string
 
   // Server Port
@@ -12,13 +13,13 @@ export interface Config {
   readonly DATABASE_PORT?: number
   readonly DATABASE_USER?: string
   readonly DATABASE_PASSWORD?: string
-  readonly DATABASE_DIALECT?: string
+  readonly DATABASE_TYPE?: any
 
   readonly API_KEY?: string
 
   readonly HANDLER_DEFAULTS?: HandlerDefaults
 
-  readonly DISABLE_SEQUELIZE_LOGGING?: boolean
+  readonly DATABASE_LOGGING?: any
 }
 
 export interface HandlerDefaults {

@@ -14,24 +14,23 @@ import {
   Required,
 } from 'ts-express-decorators'
 import { Returns, Schema, Security } from 'ts-express-decorators/swagger'
-import { FooService } from '../../services'
-import { FooResponse, FooCreateRequest, FooUpdateRequest, PagedFooResponse } from '../../models'
-import { PagedResponse } from '../../models/paging'
+import { UserResponse, UserUpdateRequest, PagedUserResponse, PagedResponse, UserCreateRequest } from '../../models'
+import { UserService } from '../../services/user/index'
 
-@Controller('/foo')
-export class FooHandler {
+@Controller('/user')
+export class UserHandler {
 
-  constructor(private fooService: FooService){}
+  constructor(private userService: UserService){}
 
   @Get('/')
   @Security('APIKeyHeader')
-  @Returns(PagedFooResponse)
+  @Returns(PagedUserResponse)
   public async list (
     @QueryParams('pageNumber') pageNumber: number = 0,
     @QueryParams('pageSize') pageSize: number = 20,
-  ): Promise<PagedResponse<FooResponse>> {
+  ): Promise<PagedResponse<UserResponse>> {
       return {
-        data: (await this.fooService.list(pageNumber, pageSize)),
+        data: (await this.userService.list(pageNumber, pageSize)),
         pageNumber,
         pageSize,
       }
@@ -42,8 +41,8 @@ export class FooHandler {
   public get (
     @Required()
     @PathParams('id') id: string,
-  ): Promise<FooResponse> {
-    return this.fooService.get(id)
+  ): Promise<UserResponse> {
+    return this.userService.get(id)
   }
 
   @Post('/')
@@ -51,9 +50,9 @@ export class FooHandler {
   @Status(HttpStatusCodes.CREATED)
   public create (
     @Required()
-    @BodyParams() foo: FooCreateRequest,
-  ): Promise<FooResponse> {
-    return this.fooService.create(foo)
+    @BodyParams() user: UserCreateRequest,
+  ): Promise<UserResponse> {
+    return this.userService.create(user)
   }
 
   @Patch('/:id')
@@ -62,9 +61,9 @@ export class FooHandler {
     @Required()
     @PathParams('id') id: string,
     @Required()
-    @BodyParams() foo: FooUpdateRequest,
-  ): Promise<FooResponse> {
-    return this.fooService.update(id, foo)
+    @BodyParams() user: UserUpdateRequest,
+  ): Promise<UserResponse> {
+    return this.userService.update(id, user)
   }
 
   @Delete('/:id')
@@ -74,6 +73,6 @@ export class FooHandler {
     @Required()
     @PathParams('id') id: string,
   ): Promise<void> { // TODO Type of response
-    return this.fooService.delete(id)
+    return this.userService.delete(id)
   }
 }

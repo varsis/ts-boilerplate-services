@@ -1,2 +1,2 @@
-export * from './foo.interface'
+export * from './user.interface'
 export * from './paging.interface'

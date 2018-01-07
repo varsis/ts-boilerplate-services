@@ -1,2 +1,2 @@
 export * from './database'
-export * from './foo'
+export * from './user'

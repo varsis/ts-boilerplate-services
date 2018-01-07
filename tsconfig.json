@@ -2,7 +2,6 @@
 	"compilerOptions": {
 		"target": "es6",
 		"lib": ["es6", "dom"],
-		"types": ["reflect-metadata", "chai", "mocha"],
     "typeRoots": ["./node_modules/@types", "./types"],
 		"module": "commonjs",
 		"moduleResolution": "node",
@@ -28,4 +27,3 @@
     "src/**/*"
   ]
 }
-

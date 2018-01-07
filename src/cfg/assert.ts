@@ -18,7 +18,7 @@ const MANDATORY_CONFIG_VARS: ConfigVars = {
     'PORT',
     'DATABASE',
     'DATABASE_HOST',
-    'DATABASE_DIALECT',
+    'DATABASE_TYPE',
     'DATABASE_USER',
   ],
   production: [

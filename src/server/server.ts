@@ -14,7 +14,7 @@ import { CONFIG } from '../cfg'
 
 import { GlobalApiKeyAuthMiddleware } from '../middleware'
 import requestLogger from '../middleware/request-logger.middleware'
-import * as SEQUELIZE_CONFIG from '../cfg/database'
+import * as TYPEORM_CONNECTION_OPTIONS from '../cfg/database'
 import { DatabaseService } from '../services/database/index'
 import { BaseError } from '../errors/error'
 import { InternalServerError } from '../errors'
@@ -34,7 +34,7 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
   },
   port: CONFIG.PORT,
   componentsScan: [
-    `${rootDir}/database-models/factory/!(*.spec).${CONFIG.EXTENSION}`,
+    `${rootDir}/entity/factory/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/models/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/interaces/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/middleware/**/!(*.spec).${CONFIG.EXTENSION}`,
@@ -62,8 +62,9 @@ export class Server extends ServerLoader {
 
   @Inject()
   async $onInit(): Promise<any> {
-    const database = DatabaseService.connect(SEQUELIZE_CONFIG)
-    return database.authenticate()
+    console.log(TYPEORM_CONNECTION_OPTIONS)
+    const database = DatabaseService.connect(TYPEORM_CONNECTION_OPTIONS)
+    return database
       .then(() => log.debug('DB connected'))
   }
 

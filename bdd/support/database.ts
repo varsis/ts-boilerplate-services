@@ -6,7 +6,7 @@ import * as log from 'menna'
 import { Sequelize } from 'sequelize-typescript'
 import { DatabaseService } from '../../src/services/database'
 import { DatabaseSpace } from './database.space'
-import * as SEQUELIZE_CONFIG from '../../src/cfg/database'
+import * as TYPEORM_CONNECTION_OPTIONS from '../../src/cfg/database'
 import * as Umzug from 'umzug'
 
 @binding([DatabaseSpace])

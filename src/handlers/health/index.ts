@@ -18,9 +18,7 @@ export class HealthHandler {
     @Res() response: Express.Response,
   ): Promise<HealthResponse> {
     let database = true
-    try {
-      await this.databaseService.instance().authenticate()
-    } catch {
+    if (!this.databaseService.instance().isConnected) {
       database = false
       response.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR
     }

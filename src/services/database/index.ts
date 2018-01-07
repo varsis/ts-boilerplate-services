@@ -1,18 +1,19 @@
-import { ISequelizeConfig, Sequelize } from 'sequelize-typescript'
+import { createConnection, Connection, ConnectionOptions } from 'typeorm'
 import { Service } from 'ts-express-decorators'
 
 @Service()
 export class DatabaseService {
 
-  private static instance: Sequelize
-  public static connect(config: ISequelizeConfig): Sequelize {
+  private static instance: Connection
+  public static connect(config: ConnectionOptions): Promise<Connection> {
     if (!this.instance) {
-      this.instance = new Sequelize(config)
+      return createConnection(config)
+        .then(connection => this.instance = connection)
     }
-    return this.instance
+    return Promise.resolve(this.instance)
   }
 
-  public instance(): Sequelize {
+  public instance(): Connection {
     if (!DatabaseService.instance) {
       throw new Error('Instance not initialised')
     }

@@ -17,7 +17,7 @@
     "tsc": "./node_modules/.bin/tsc --project tsconfig.json",
     "tsc:w": "tsc -w",
     "start": "concurrently \"npm run tsc:w\" \"nodemon out/app.js\"",
-    "seeds:create": "sequelize seed:generate --name",
+    "seeds:create": "typeorm seed:generate --name",
     "migrations:create": "sequelize migration:generate --name",
     "migrations:up": "sequelize db:migrate",
     "migrations:down": "sequelize db:migrate:undo:all",
@@ -38,15 +38,13 @@
     "menna": "^1.0.3",
     "method-override": "^2.3.6",
     "mysql2": "^1.2.0",
-    "pg": "^7.3.0",
     "ramda": "^0.24.1",
     "reflect-metadata": "^0.1.10",
     "safe-compare": "^1.0.3",
-    "sequelize": "^4.13.17",
-    "sequelize-typescript": "^0.5.0",
     "swagger-express-middleware": "^1.0.0-alpha.12",
     "swagger-ui-express": "^2.0.8",
     "ts-express-decorators": "git+https://github.com/varsis/ts-express-decorators",
+    "typeorm": "^0.1.9",
     "typescript": "^2.6.1"
   },
   "devDependencies": {
@@ -69,7 +67,6 @@
     "mocha": "^4.0.1",
     "nodemon": "^1.11.0",
     "prettyjson": "^1.2.1",
-    "sequelize-cli": "^3.0.0",
     "sinon": "^4.1.1",
     "sqlite3": "^3.1.13",
     "supertest": "^3.0.0",
@@ -79,7 +76,6 @@
     "tslint-config-airbnb": "^5.3.0",
     "tslint-config-airbnb-base": "^0.1.0",
     "tslint-eslint-rules": "^4.1.1",
-    "umzug": "^2.1.0",
     "uuid-validate": "0.0.2"
   },
   "nodemonConfig": {
