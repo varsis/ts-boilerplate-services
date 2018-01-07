@@ -7,8 +7,10 @@ const TYPEORM_CONNECTION_OPTIONS: MysqlConnectionOptions = {
   logging: CONFIG.DATABASE_LOGGING || false,
   timezone: 'Z', // Cast dates to UTC
   connectTimeout: 1000,
-  debug: CONFIG.DEBUG, // Debug Mode
+  debug: Boolean(CONFIG.DEBUG), // Debug Mode
   migrationsRun: true, // Always run migrations
+  synchronize: true, // For Testing
+
 
   username: CONFIG.DATABASE_USER || '',
   password: CONFIG.DATABASE_PASSWORD || '',

@@ -33,6 +33,7 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
     '/': `${rootDir}/handlers/**/**.${CONFIG.EXTENSION}`,
   },
   port: CONFIG.PORT,
+  debug: CONFIG.DEBUG,
   componentsScan: [
     `${rootDir}/entity/factory/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/models/**/!(*.spec).${CONFIG.EXTENSION}`,
