@@ -9,8 +9,6 @@ const TYPEORM_CONNECTION_OPTIONS: MysqlConnectionOptions = {
   connectTimeout: 1000,
   debug: Boolean(CONFIG.DEBUG), // Debug Mode
   migrationsRun: true, // Always run migrations
-  synchronize: true, // For Testing
-
 
   username: CONFIG.DATABASE_USER || '',
   password: CONFIG.DATABASE_PASSWORD || '',

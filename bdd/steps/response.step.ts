@@ -1,7 +1,7 @@
 import { flatten, split, path, isNil } from 'ramda'
 import { has, get } from 'lodash'
 import { expect } from 'chai'
-import { binding, given, then, when } from "cucumber-tsflow"
+import { binding, given, then, when } from 'cucumber-tsflow'
 import * as statusCodes from 'http-status-codes'
 import * as prettyjson from 'prettyjson'
 import { ResponseSpace, propertiesExistInList, propertiesDontExistInList, typeOf } from '../support'
@@ -27,7 +27,7 @@ class ResponseStep {
     return Promise.reject(`Expected ${statusName} (code: ${code}), got ${this.responseSpace.code}`)
   }
 
-  @then(/^the response should have a "(.*)" header of "(.*)"$/)
+  @then(/^the response should have a '(.*)' header of '(.*)'$/)
   public async thenResponseHeader(headerName, value): Promise<any> {
     expect(this.responseSpace.response.headers[headerName]).to.equal(value)
   }

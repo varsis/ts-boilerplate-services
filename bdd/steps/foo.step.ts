@@ -1,4 +1,4 @@
-import { binding, given, then } from "cucumber-tsflow"
+import { binding, given, then } from 'cucumber-tsflow'
 import { omit } from 'ramda'
 import { expect } from 'chai'
 import * as uuidValidate from 'uuid-validate'
@@ -15,7 +15,7 @@ class FooStep {
     protected responseSpace: ResponseSpace,
     protected databaseSpace: DatabaseSpace,
   ) {
-    this.Foo = this.databaseSpace.sequelize.models.Foo
+    this.Foo = {} as any
   }
 
 

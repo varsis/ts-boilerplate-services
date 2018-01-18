@@ -1,4 +1,4 @@
-import { binding, given, then } from "cucumber-tsflow"
+import { binding, given, then } from 'cucumber-tsflow'
 import { omit } from 'ramda'
 import { expect } from 'chai'
 import { DatabaseSpace } from '../support'
@@ -12,7 +12,7 @@ class DatabaseStep {
   constructor(
     protected databaseSpace: DatabaseSpace,
   ) {
-    this.models = this.databaseSpace.sequelize.models
+    this.models = {} //this.databaseSpace.connection
   }
 
 

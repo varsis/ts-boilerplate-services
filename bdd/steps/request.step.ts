@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import * as supertest from 'supertest'
 import { mergeAll } from 'ramda'
-import { binding, given, then, when } from "cucumber-tsflow"
+import { binding, given, then, when } from 'cucumber-tsflow'
 import * as uuidValidate from 'uuid-validate'
 import { RequestSpace, ResponseSpace, ServerSpace } from '../support'
 import { CONFIG } from '../../src/cfg'

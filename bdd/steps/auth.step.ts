@@ -1,4 +1,4 @@
-import { binding, given, then } from "cucumber-tsflow"
+import { binding, given, then } from 'cucumber-tsflow'
 import { expect } from 'chai'
 import { RequestSpace, ResponseSpace } from '../support'
 import { Unauthorized } from '../../src/errors'
