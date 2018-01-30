@@ -9,6 +9,7 @@ export const server = serverInstance
   .start()
   .then(() => {
     log.info('Server started...')
+    return serverInstance
   })
   .catch((err: any) => {
     log.error(err)

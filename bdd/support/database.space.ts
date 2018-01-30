@@ -3,9 +3,14 @@ import { DatabaseService } from '../../src/services/database'
 import * as TYPEORM_CONNECTION_OPTIONS from '../../src/cfg/database'
 
 export class DatabaseSpace {
-  public connection: Promise<Connection>
+
+  private static _connection: Promise<Connection>
 
   constructor() {
-    this.connection = DatabaseService.connect({ ...TYPEORM_CONNECTION_OPTIONS, migrationsRun: false, name: 'test' })
+    DatabaseSpace._connection = DatabaseService.connect({ ...TYPEORM_CONNECTION_OPTIONS, migrationsRun: true, name: 'test' })
+  }
+
+  get connection(): Promise<Connection> {
+    return DatabaseSpace._connection
   }
 }

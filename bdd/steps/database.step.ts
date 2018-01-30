@@ -1,26 +1,24 @@
 import { binding, given, then } from 'cucumber-tsflow'
 import { omit } from 'ramda'
 import { expect } from 'chai'
+import { getRepository } from 'typeorm'
 import { DatabaseSpace } from '../support'
 import { CONFIG } from '../../src/cfg'
 
 @binding([DatabaseSpace])
 class DatabaseStep {
 
-  private models
-
   constructor(
-    protected databaseSpace: DatabaseSpace,
-  ) {
-    this.models = {} //this.databaseSpace.connection
-  }
-
+    private databaseSpace: DatabaseSpace,
+  ){}
 
   @given(/^the database has a model identified as:$/)
   public async givenModel(data): Promise<void> {
     const { modelName, modelData } = this.getTableData(data)
 
-    await this.models[modelName].create(modelData)
+    const connection = await this.databaseSpace.connection
+    return connection.getRepository(modelName).create(modelData)
+      .then(res => console.log(res))
   }
 
   @then(/^the database should have a model identified as:$/)
@@ -38,7 +36,8 @@ class DatabaseStep {
   private async expectOne(data): Promise<any>  {
     const { modelName, modelData } = this.getTableData(data)
 
-    const dbRecord = await this.models[modelName].findOne({ where: modelData })
+    const connection = await this.databaseSpace.connection
+    const dbRecord = await connection.getRepository(modelName).findOne({ where: modelData })
 
     return expect(dbRecord)
   }

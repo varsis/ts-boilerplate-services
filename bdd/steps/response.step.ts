@@ -101,6 +101,7 @@ class ResponseStep {
   @then(/^the response should have a (\w+) with length `(\d+)`/)
   public async thenResponsePropertyLength(propertyName, propertyLength) {
       const bodyObject = this.responseSpace.body
+    console.log(bodyObject)
       const value = get(bodyObject, propertyName) as any
 
       if (value.length === Number(propertyLength)) {

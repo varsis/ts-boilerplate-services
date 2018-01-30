@@ -1,14 +1,17 @@
-import { serverInstance } from '../../src/app'
+import { Server } from '../../src/server'
+
+import { serverInstance, server } from '../../src/app'
 
 export class ServerSpace {
 
-  public server
+  public express
 
   constructor() {
-    this.server = serverInstance.expressApp
+    this.express = serverInstance.expressApp
   }
 
-  start(): Promise<void> {
-    return Promise.resolve()
+  public async start(): Promise<Server | void> {
+    return server
   }
+
 }

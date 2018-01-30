@@ -12,6 +12,7 @@
     "test-server": "NODE_ENV=test ./node_modules/.bin/ts-node -P ./ ./src/app.ts",
     "lint": "tslint ./src/*/**.ts",
     "test:bdd": "NODE_ENV=test cucumber.js --compiler ts:ts-node/register bdd -r bdd/steps -r bdd/support",
+    "test:bdd:specific": "NODE_ENV=test cucumber.js --compiler ts:ts-node/register bdd -r bdd/steps -r bdd/support --tags @include",
     "test:unit": "NODE_ENV=test mocha -r ts-node/register --reporter spec --check-leaks --bail src/**/*.spec.ts bdd/**/*.spec.ts",
     "test": "NODE_ENV=test concurrently \"npm run test:bdd\" \"npm run test:unit\"",
     "tsc": "./node_modules/.bin/tsc --project tsconfig.json",

@@ -40,8 +40,8 @@ class RequestStep {
     const query = this.requestSpace.query
     const headers = this.requestSpace.headers
 
-    const app = await this.serverSpace.server
-    let test = supertest(await this.serverSpace.server)
+    const app = await this.serverSpace.express
+    const test = supertest(app)
     let request = test[method](uri)
 
     Object.keys(headers).forEach(

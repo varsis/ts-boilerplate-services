@@ -4,7 +4,7 @@ import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOpti
 
 const TYPEORM_CONNECTION_OPTIONS: MysqlConnectionOptions = {
   type: CONFIG.DATABASE_TYPE || '',
-  logging: CONFIG.DATABASE_LOGGING || false,
+  logging: ['query'], // CONFIG.DATABASE_LOGGING || true,
   timezone: 'Z', // Cast dates to UTC
   connectTimeout: 1000,
   debug: Boolean(CONFIG.DEBUG), // Debug Mode
@@ -16,7 +16,7 @@ const TYPEORM_CONNECTION_OPTIONS: MysqlConnectionOptions = {
   host: CONFIG.DATABASE_HOST,
   port: CONFIG.DATABASE_PORT,
 
-  entities: [path.join(__dirname, `../entity/*.${CONFIG.EXTENSION}`)],
+  entities: [path.join(__dirname, `../repos/*.${CONFIG.EXTENSION}`)],
   subscribers: [path.join(__dirname, `../subscribers/*.${CONFIG.EXTENSION}`)],
   migrations: [path.join(__dirname, `../migrations/*.${CONFIG.EXTENSION}`)],
 }
