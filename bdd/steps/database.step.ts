@@ -17,8 +17,9 @@ class DatabaseStep {
     const { modelName, modelData } = this.getTableData(data)
 
     const connection = await this.databaseSpace.connection
-    return connection.getRepository(modelName).create(modelData)
-      .then(res => console.log(res))
+    const repo = connection.getRepository(modelName)
+    const item = repo.create(modelData)
+    await repo.save(item)
   }
 
   @then(/^the database should have a model identified as:$/)
@@ -30,7 +31,7 @@ class DatabaseStep {
   @then(/^the database should not have a model identified as:$/)
   public async thenNotModel(data): Promise<void> {
     const item = await this.expectOne(data)
-    item.to.be.null
+    item.to.be.undefined
   }
 
   private async expectOne(data): Promise<any>  {

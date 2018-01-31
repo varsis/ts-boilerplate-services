@@ -2,6 +2,7 @@ import { Config } from './cfg.interface'
 import './dotenv'
 
 const DEFAULT_DATABASE_PORT = '3306'
+const DEFAULT_DATABASE_CONNECT_TIMEOUT = '10000'
 const DEFAULT_EXTENSION = 'js'
 const INT_BASE = 10
 
@@ -20,6 +21,8 @@ export const CONFIG: Config = {
   DATABASE_USER: process.env.DATABASE_USER,
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
   DATABASE_LOGGING: process.env.DATABASE_LOGGING,
+  DATABASE_CONNECT_TIMEOUT: parseInt(process.env.DATABASE_CONNECT_TIMEOUT
+    || DEFAULT_DATABASE_CONNECT_TIMEOUT, INT_BASE),
 
   API_KEY: process.env.API_KEY,
 

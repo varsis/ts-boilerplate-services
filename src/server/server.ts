@@ -35,7 +35,6 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
   port: CONFIG.PORT,
   debug: CONFIG.DEBUG,
   componentsScan: [
-    `${rootDir}/repos/factory/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/models/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/interaces/**/!(*.spec).${CONFIG.EXTENSION}`,
     `${rootDir}/middleware/**/!(*.spec).${CONFIG.EXTENSION}`,
@@ -58,12 +57,12 @@ blocked((ms) => { if (ms > 100) { log.warn(`Node event loop was blocked for ${ms
     },
   },
   acceptMimes: ['application/json'],
+  validationModelStrict: false,
 })
 export class Server extends ServerLoader {
 
   @Inject()
   async $onInit(): Promise<any> {
-    console.log('============================= \n\n\n\n\n\n\n\nConnecting to db')
     const database = DatabaseService.connect(TYPEORM_CONNECTION_OPTIONS)
     return database
       .then(() => log.debug('DB connected'))

@@ -27,7 +27,7 @@ class ResponseStep {
     return Promise.reject(`Expected ${statusName} (code: ${code}), got ${this.responseSpace.code}`)
   }
 
-  @then(/^the response should have a '(.*)' header of '(.*)'$/)
+  @then(/^the response should have a `(.*)` header of `(.*)`$/)
   public async thenResponseHeader(headerName, value): Promise<any> {
     expect(this.responseSpace.response.headers[headerName]).to.equal(value)
   }
@@ -68,7 +68,7 @@ class ResponseStep {
       return Promise.reject(`Expected ${propertyName} to be falsy in response body`)
     }
 
-  @then(/the response should have property $propertyName of type `(.+)`/)
+  @then(/the response should have property (.+) of type `(.+)`$/)
   public async thenPropertyResponseType(propertyName, propertyType) {
       const body = this.responseSpace.body
 

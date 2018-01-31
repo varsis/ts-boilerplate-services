@@ -2,11 +2,11 @@ Feature: CRUD actions on /user
 
 Background:
     Given the database has a model identified as:
-    | modelName | sequentialId | id                                   | firstName | lastName |
-    | User      | 1            | 1eef75ed-4e11-4976-87e3-a334afed072d | Chris     | Test     |
+    | modelName | sequentialId | id                                   | firstName | lastName | age |
+    | User      | 1            | 1eef75ed-4e11-4976-87e3-a334afed072d | Chris     | Test     | 33  |
    And the database has a model identified as:
-    | modelName | sequentialId | id                                   | firstName | lastName |
-    | User      | 2            | 3a332193-93bb-446e-8330-2ac303e4d11b | Test      | TestLast |
+    | modelName | sequentialId | id                                   | firstName | lastName | age |
+    | User      | 2            | 3a332193-93bb-446e-8330-2ac303e4d11b | Test      | TestLast | 20  |
 
   @include
 Scenario: I can list all the users
@@ -26,7 +26,9 @@ Scenario: I can create a user
         | createUser | lastCreate |
     When the request is sent to the server
     Then the response should indicate Created
-    And the foo should be output in the response
+    And the response should have a firstName with value `createUser`
+    And the response should have a lastName with value `lastCreate`
+    And the response should have property id of type `string`
     And the database should have a model identified as:
         | modelName | firstName  | lastName   |
         | User      | createUser | lastCreate |
@@ -38,7 +40,7 @@ Scenario: I can update a user
         | updatedFirstName |
     When the request is sent to the server
     Then the response should indicate Ok
-    And the foo should be output in the response
+    And the response should have a firstName with value `updatedFirstName`
     And the database should have a model identified as:
         | modelName | firstName        |
         | User      | updatedFirstName |

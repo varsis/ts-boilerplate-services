@@ -1,28 +1,38 @@
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, Generated } from 'typeorm'
 import { JsonProperty } from 'ts-express-decorators'
-import { Schema } from 'ts-express-decorators/swagger'
-import { IUserResponse, IUserUpdateRequest, IPagedUserResponse, IUserCreateRequest } from '../interfaces'
-import { PagedResponse } from './paging'
+import { IUserResponse, IPagedUserResponse, IUserCreateRequest, IUserUpdateRequest } from '../interfaces'
+import { PagedResponse } from './Paging'
 
-export class UserResponse implements IUserResponse {
+@Entity()
+export class User extends BaseEntity implements IUserResponse {
+  @PrimaryGeneratedColumn()
   @JsonProperty()
   sequentialId: number
 
+  @Column({
+    type: 'uuid',
+    nullable: false,
+  })
+  @Generated('uuid')
   @JsonProperty()
   id: string
 
+  @Column()
   @JsonProperty()
   firstName: string
 
+  @Column()
   @JsonProperty()
   lastName: string
 
+  @Column()
   @JsonProperty()
   age?: number
 }
 
-export class PagedUserResponse extends PagedResponse<UserResponse> implements IPagedUserResponse {
-  @JsonProperty({ use: UserResponse })
-  data: UserResponse[]
+export class PagedUserResponse extends PagedResponse<User> implements IPagedUserResponse {
+  @JsonProperty({ use: User })
+  data: User[]
 }
 
 export class UserCreateRequest implements IUserCreateRequest {

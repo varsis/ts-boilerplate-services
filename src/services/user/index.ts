@@ -1,7 +1,7 @@
 import { Service } from 'ts-express-decorators'
 import { Repository } from 'typeorm'
-import { RepositoryFactory } from '../../repos/factory'
-import { User } from '../../repos/User'
+import { RepositoryFactory } from '../../models/factory'
+import { User } from '../../models/User'
 import { UserNotFound } from '../../errors'
 import { IUserCreateRequest, IUserUpdateRequest } from '../../interfaces'
 
@@ -20,7 +20,7 @@ export class UserService {
   }
   public async update(id: string, userUpdate: IUserUpdateRequest): Promise<User> {
     const user = await this.get(id)
-    await this.userRepo.updateById(id, userUpdate)
+    await this.userRepo.update({ id }, userUpdate)
     const updatedUser = await this.get(id)
     return updatedUser
   }
@@ -34,7 +34,7 @@ export class UserService {
     await (await this.get(id)).remove()
   }
   public async get(id: string): Promise<User> {
-    const user = await this.userRepo.findOneById(id)
+    const user = await this.userRepo.findOne({ id })
     if (!user) throw new UserNotFound()
     return user
   }

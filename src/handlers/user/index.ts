@@ -14,7 +14,7 @@ import {
   Required,
 } from 'ts-express-decorators'
 import { Returns, Schema, Security } from 'ts-express-decorators/swagger'
-import { UserResponse, UserUpdateRequest, PagedUserResponse, PagedResponse, UserCreateRequest } from '../../models'
+import { User, UserUpdateRequest, PagedUserResponse, PagedResponse, UserCreateRequest } from '../../models'
 import { UserService } from '../../services/user/index'
 
 @Controller('/user')
@@ -28,7 +28,7 @@ export class UserHandler {
   public async list (
     @QueryParams('pageNumber') pageNumber: number = 0,
     @QueryParams('pageSize') pageSize: number = 20,
-  ): Promise<PagedResponse<UserResponse>> {
+  ): Promise<PagedResponse<User>> {
       return {
         data: (await this.userService.list(pageNumber, pageSize)),
         pageNumber,
@@ -41,7 +41,7 @@ export class UserHandler {
   public get (
     @Required()
     @PathParams('id') id: string,
-  ): Promise<UserResponse> {
+  ): Promise<User> {
     return this.userService.get(id)
   }
 
@@ -51,7 +51,7 @@ export class UserHandler {
   public create (
     @Required()
     @BodyParams() user: UserCreateRequest,
-  ): Promise<UserResponse> {
+  ): Promise<User> {
     return this.userService.create(user)
   }
 
@@ -62,17 +62,18 @@ export class UserHandler {
     @PathParams('id') id: string,
     @Required()
     @BodyParams() user: UserUpdateRequest,
-  ): Promise<UserResponse> {
+  ): Promise<User> {
     return this.userService.update(id, user)
   }
 
   @Delete('/:id')
   @Security('APIKeyHeader')
   @Status(HttpStatusCodes.NO_CONTENT)
-  public delete(
+  public async delete(
     @Required()
     @PathParams('id') id: string,
-  ): Promise<void> { // TODO Type of response
-    return this.userService.delete(id)
+  ): Promise<any> { // TODO Type of response
+    await this.userService.delete(id)
+    return null
   }
 }

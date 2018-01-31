@@ -14,6 +14,7 @@ export interface Config {
   readonly DATABASE_USER?: string
   readonly DATABASE_PASSWORD?: string
   readonly DATABASE_TYPE?: any
+  readonly DATABASE_CONNECT_TIMEOUT?: number
 
   readonly API_KEY?: string
 

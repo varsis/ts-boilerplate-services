@@ -20,9 +20,9 @@ export class Unauthorized extends BaseError {
 }
 
 export class BadRequest extends BaseError {
-  constructor() {
-    super(HttpErrorCodes.BAD_REQUEST, '400.1', 'Invalid Request (unspecified reason)')
-  }
+   constructor() {
+     super(HttpErrorCodes.BAD_REQUEST, '400.1', 'Invalid Request (unspecified reason)')
+   }
 }
 
 export class RequiredFieldMissing extends BaseError {
